@@ -1,5 +1,6 @@
+#Requires AutoHotkey v2
 #SingleInstance
-DetectHiddenWindows, On
+DetectHiddenWindows true
 VerticalScale := 1
 numberOfRows := 26
 numberOfCols := 26
@@ -10,11 +11,12 @@ colSpacing := 1.025 * GridWidth / numberOfCols
 AscA := 97
 KeyArray := ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-#IfWinNotActive CoordGrid
-	#IfWinNotExist CoordGrid
+HotIfWinNotActive "ahk_class CoordGrid"
+	HotIfWinNotExist "ahk_class CoordGrid"
 		global VerticalScale, numberOfRows, numberOfCols, GridHeight, GridWidth, rowSpacing, colSpacing, KeyArray
 
 		NumpadEnter::
+        {
 	 		; Display Coordinates 
 			rowCounter := 0
 			Loop {
@@ -41,8 +43,9 @@ KeyArray := ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 			WinSet, Transcolor, 000115, CoordGrid
 			
 			Return
-	#IfWinNotExist	
-#IfWinNotActive	
+        }
+	HotIfWinNotExist	
+HotIfWinNotActive	
 
 #IfWinExist CoordGrid
 	#IfWinNotActive CoordGrid
